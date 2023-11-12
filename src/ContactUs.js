@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import Comments from './Comments';
 
 function ContactUs() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [comments, setComments] = useState('');
+  const [phoneType, setPhoneType] = useState('');
 
   const onSubmit = e => {
     // Prevent the default form behavior so the page doesn't reload.
@@ -14,6 +17,8 @@ function ContactUs() {
       name,
       email,
       phone,
+      phoneType,
+      comments,
       submittedOn: new Date()
     };
 
@@ -25,6 +30,8 @@ function ContactUs() {
     setName('');
     setEmail('');
     setPhone('');
+    setPhoneType('');
+    setComments('');
   };
 
   return (
@@ -57,7 +64,20 @@ function ContactUs() {
             onChange={e => setPhone(e.target.value)}
             value={phone}
           />
+          <select
+            name='phoneType'
+            onChange={e => setPhoneType(e.target.value)}
+            value={phoneType}
+          >
+            <option value='' disabled>
+              Select a phone type...
+            </option>
+            <option>Home</option>
+            <option>Work</option>
+            <option>Mobile</option>
+          </select>
         </div>
+        <Comments comments={comments} setComments={setComments}/>
         <button>Submit</button>
       </form>
     </div>
